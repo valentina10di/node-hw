@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Socket.io Chat</title>
+</head>
+<body>
+    <h1>Простой чат на Socket.io</h1>
+
+    <!-- 4. Область для отображения полученных сообщений и поле ввода -->
+    <ul id="messages"></ul>
+
+    <form id="formChat">
+        <input type="text" id="messageInput" placeholder="Введите сообщение..." autocomplete="off">
+        <button type="submit">Send Message</button>
+    </form>
+
+    <!-- 4. Подключение клиентской библиотеки Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // 5. Инициализация соединения с сервером через Socket.io
+        const socket = io();
+
+        const form = document.getElementById('formChat');
+        const messageInput = document.getElementById('messageInput');
+        const messages = document.getElementById('messages');
+
+        // Отслеживание подключения к серверу
+        socket.on('connect', () => {
+            console.log('Подключено к серверу, мой ID:', socket.id);
+        });
+
+        // 5. Обработчик нажатия кнопки "Send Message" (отправка сообщения на сервер)
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const text = messageInput.value.trim();
+            
+            if (!text) return;
+
+            // Отправляем текст на сервер и передаем функцию подтверждения (ack)
+            socket.emit('message', text, (response) => {
+                // 5. Настройка обработки ответа от сервера (отображение подтверждения)
+                if (response && response.status === 'received') {
+                    const li = document.createElement('li');
+                    li.textContent = `Подтверждение от сервера: ${response.text}`;
+                    messages.appendChild(li);
+                }
+                
+                // Очищаем поле ввода
+                messageInput.value = '';
+            });
+        });
+    </script>
+</body>
+</html>
