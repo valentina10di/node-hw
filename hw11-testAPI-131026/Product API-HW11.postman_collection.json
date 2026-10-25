@@ -1,0 +1,80 @@
+{
+  "info": {
+    "_postman_id": "4e9a1d4f-f91d-4cfc-bfd1-edb4e1786e9a",
+    "name": "Product API-HW11",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58665650"
+  },
+  "item": [
+    {
+      "name": "createProduct",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Product Four\",\r\n  \"price\": 99.99\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/products",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProdukts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/products",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/product/3",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "product",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
